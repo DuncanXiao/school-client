@@ -28,7 +28,7 @@ const setting = {
         }
       },
       {
-        test: /\.(scss)$/,
+        test: /\.(scss)|.(css)$/,
         include: appDirectory,
         exclude: pluginCssPath,
         use: extractAppStyle.extract({

@@ -1,6 +1,5 @@
 import sayword from 'Utilities/some-method';
 import Banner from './container/Banner';
-import 'bootstrap/dist/css/bootstrap.css';
 
 const HomePage = function(){
   return (

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=dev page=$page webpack-dev-server --mode development --config ./webpack/dev.config.js",
-    "build:prod": "NODE_ENV=prod webpack --require ignore-styles --mode production --config ./webpack/prod.config.js"
+    "build:dev": "NODE_ENV=dev page=$page webpack --require --mode development --config ./webpack/dev.config.js",
+    "build:prod": "NODE_ENV=prod webpack --require --mode production --config ./webpack/prod.config.js"
   },
   "repository": {
     "type": "git",
@@ -49,7 +50,6 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.1.0",
-    "ignore-styles": "^5.0.1",
     "mocha": "^5.2.0",
     "node-sass": "^4.8.3",
     "react-hot-loader": "^4.0.0",
@@ -63,7 +63,6 @@
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "config": "^2.0.1",
     "dotenvjs": "^1.0.5",

@@ -2,11 +2,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const common = require('./common.config');
-const globalStyleDirectory = common.appDirectory + '/stylesheet/global';
 const extractAppStyle = new ExtractTextPlugin({filename: '[name]-apps.css', allChunks: true});
+const extractPluginStyle = new ExtractTextPlugin({filename: '[name]-plugin.css', allChunks: true});
+const appDirectory = common.appDirectory;
+const pluginCssPath = `${appDirectory}/lib/plugin-css`;
 
 const page = {
-  homePage: [`${common.appDirectory}/apps/HomePage/dev.jsx`]
+  homePage: [`${appDirectory}/apps/OpenGallery/HomePage/dev.jsx`]
 }
 
 const setting = {
@@ -22,14 +24,15 @@ const setting = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: common.appDirectory,
+        include: appDirectory,
         use: {
           loader: 'babel-loader'
         }
       },
       {
-        test: /\.(scss)$/,
-        include: common.appDirectory,
+        test: /\.(scss)|.(css)$/,
+        include: appDirectory,
+        exclude: pluginCssPath,
         use: extractAppStyle.extract({
           fallback: 'style-loader',
           use: [
@@ -46,7 +49,7 @@ const setting = {
               options: {
                 sourceMap: true,
                 includePaths: [
-                  common.appDirectory+'/lib/stylesheet'
+                  appDirectory+'/lib/stylesheet'
                 ]
               }
             }
@@ -54,13 +57,30 @@ const setting = {
         })
       },
       {
+        test: /\.(css)$/,
+        include: pluginCssPath,
+        use: extractPluginStyle.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                camelCase: true
+              }
+            }
+          ]
+        })
+      },
+      {
         test: /\.(ttf|woff2|woff|eot|svg)/,
-        include: common.appDirectory,
+        include: appDirectory,
         use: {loader: 'file-loader'}
       }
     ]
   },
   plugins: [
+    extractPluginStyle,
     extractAppStyle,
     new webpack.ProvidePlugin({
       React: 'react',
@@ -71,9 +91,8 @@ const setting = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: 'Koa-React',
-      template: common.appDirectory + '/index.ejs',
-      // globalCss: [`${common.appDirectory}/globalCss/bootstrap.css`, `${common.appDirectory}/globalCss/base.css`],
-      globalCss: ['./bootstrap.css', './base.css'],
+      template: appDirectory + '/index.ejs',
+      pluginCss: '[name]-plugin.css',
       inject: false
     })
   ],

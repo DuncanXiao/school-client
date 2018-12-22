@@ -3,10 +3,6 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="./lib/global-css/bootstrap.v3.3.7.min.css"></link>
-    <% for(var i=0; i < htmlWebpackPlugin.options.globalCss.length; i++) { %>
-    <link rel="stylesheet" href=".<%= htmlWebpackPlugin.options.globalCss[i] %>"></link>
-    <% } %>
     <% for(var i=0; i < htmlWebpackPlugin.files.css.length; i++) { %>
     <link rel="stylesheet" href=".<%= htmlWebpackPlugin.files.css[i] %>"></link>
     <% } %>

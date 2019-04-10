@@ -1,5 +1,4 @@
 {
-  "tbl": {
-    "endpoint": "qa-twoblight.com"
-  }
+  "domain": "http://localhost:3000",
+  "apiHost": "http://localhost:3001"
 }

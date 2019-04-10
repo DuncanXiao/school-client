@@ -7,20 +7,26 @@ const configuration = require('config');
 const definePlugin = new webpack.DefinePlugin({
   'process.env': {
     NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-    endpoint: JSON.stringify(configuration.get('tbl.endpoint'))
+    DOMAIN: JSON.stringify(configuration.get('domain')),
+    APIHOST: JSON.stringify(configuration.get('apiHost'))
   }
 });
 
 const baseSetting = {
+  node: {
+    fs: 'empty'
+  },
   resolve: {
     enforceExtension: false,
     extensions: ['.js', '.jsx'],
     modules: ['node_modules'],
     alias: {
-      Components: appDirectory + '/components',
-      Apps: appDirectory + '/apps',
-      Utilities: appDirectory + '/utilities',
-      Lib: appDirectory + '/lib'
+      Components: `${appDirectory}/components`,
+      Apps: `${appDirectory}/apps`,
+      Utilities: `${appDirectory}/utilities`,
+      Lib: `${appDirectory}/lib`,
+      Feature: `${appDirectory}/feature`,
+      Statics: `${appDirectory}/statics`
     }
   }
 };

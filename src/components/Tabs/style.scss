@@ -1,0 +1,29 @@
+.custom-tabs {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  :global {
+    .am-flexbox {
+      height: 60px;
+    }
+    .am-grid-text {
+      margin-top: 5px !important;
+    }
+  }
+}
+
+.custom-icon {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.active {
+  height: 5px;
+  width: 30px;
+  background-color: darkgrey;
+  border-radius: 100%;
+  position: absolute;
+  top: 63px;
+  transform: translate(-50%, 0);
+  left: 50%;
+}

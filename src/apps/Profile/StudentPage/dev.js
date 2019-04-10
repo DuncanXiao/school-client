@@ -1,10 +1,9 @@
-import 'Lib/plugin-css/base.css';
-import 'Lib/plugin-css/bootstrap.v3.3.7.min.css';
 import HomePage from './index';
 import { hot } from 'react-hot-loader';
+import student from 'Feature/student';
 
 const Page = hot(module)(HomePage);
 ReactDOM.render(
-  <Page />,
+  <Page student = { student } />,
   document.getElementById('app-container')
 );

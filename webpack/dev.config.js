@@ -4,11 +4,21 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const common = require('./common.config');
 const extractAppStyle = new ExtractTextPlugin({filename: '[name]-apps.css', allChunks: true});
 const extractPluginStyle = new ExtractTextPlugin({filename: '[name]-plugin.css', allChunks: true});
+const extractLessStyle = new ExtractTextPlugin({filename: '[name]-less.css', allChunks: true});
 const appDirectory = common.appDirectory;
-const pluginCssPath = `${appDirectory}/lib/plugin-css`;
+
+const postcssOpts = {
+  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+  plugins: () => [
+    autoprefixer({
+      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+    }),
+    // pxtorem({ rootValue: 100, propWhiteList: [] })
+  ],
+};
 
 const page = {
-  homePage: [`${appDirectory}/apps/OpenGallery/HomePage/dev.jsx`]
+  studentProfile: [`${appDirectory}/apps/Profile/StudentPage/dev.js`]
 }
 
 const setting = {
@@ -30,9 +40,8 @@ const setting = {
         }
       },
       {
-        test: /\.(scss)|.(css)$/,
+        test: /\.(scss)$/,
         include: appDirectory,
-        exclude: pluginCssPath,
         use: extractAppStyle.extract({
           fallback: 'style-loader',
           use: [
@@ -57,26 +66,40 @@ const setting = {
         })
       },
       {
+        test: /\.less$/i,
+        use: extractLessStyle.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader', { loader: 'postcss-loader', options: postcssOpts }, 'less-loader'
+          ]
+        })
+      },
+      {
         test: /\.(css)$/,
-        include: pluginCssPath,
         use: extractPluginStyle.extract({
           fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
-              options: {
-                modules: true,
-                camelCase: true
-              }
+              // options: {
+              //   modules: true,
+              //   camelCase: true
+              // }
             }
           ]
         })
       },
       {
-        test: /\.(ttf|woff2|woff|eot|svg)/,
-        include: appDirectory,
-        use: {loader: 'file-loader'}
-      }
+        test: /\.(svg)$/i,
+        use: [{
+          loader: 'svg-sprite-loader'
+        }],
+        // include: [
+        //   require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+        //   `${appDirectory}`
+        //   // `path.resolve(__dirname, 'src/components')`,  // 自己私人的 svg 存放目录
+        // ]
+      },
     ]
   },
   plugins: [
@@ -105,4 +128,7 @@ const setting = {
   }
 };
 const configs = Object.assign({}, common.baseSetting, setting);
+
+console.log(configs);
+
 module.exports = configs;

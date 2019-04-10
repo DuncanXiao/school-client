@@ -1,0 +1,36 @@
+.profile-header-container {
+  width: 100%;
+  padding: 20px 0;
+  background-color: #98FB98;
+  .header-box {
+    padding: 0 10px;
+    display: flex;
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color:black;
+      flex-shrink: 0;
+    }
+    .text {
+      font-size: 20px;
+      width: 100%;
+      color: white;
+      align-self: center;
+      margin-left: 20px;
+      a {
+        width: 100%;
+        display: block;
+        position: relative;
+        .right-icon {
+          color: white;
+          align-self: center;
+          position: absolute;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          right: 0;
+        }
+      }
+    }
+  }
+}

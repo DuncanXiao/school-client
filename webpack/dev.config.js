@@ -18,7 +18,8 @@ const postcssOpts = {
 };
 
 const page = {
-  studentProfile: [`${appDirectory}/apps/Profile/StudentPage/dev.js`]
+  studentProfile: [`${appDirectory}/apps/Profile/StudentPage/dev.js`],
+  studentSignUp: [`${appDirectory}/apps/SignUp/StudentPage/dev.js`]
 }
 
 const setting = {
@@ -93,12 +94,7 @@ const setting = {
         test: /\.(svg)$/i,
         use: [{
           loader: 'svg-sprite-loader'
-        }],
-        // include: [
-        //   require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
-        //   `${appDirectory}`
-        //   // `path.resolve(__dirname, 'src/components')`,  // 自己私人的 svg 存放目录
-        // ]
+        }]
       },
     ]
   },

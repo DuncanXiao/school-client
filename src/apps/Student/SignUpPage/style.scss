@@ -1,0 +1,13 @@
+.error-input {
+  :global {
+    .am-input-control {
+      border: 1px solid #f50;
+    }
+  }
+}
+.error {
+  padding-right: 15px;
+  text-align: right;
+  color: #f50;
+  font-size: 12px;
+}

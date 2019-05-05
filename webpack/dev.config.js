@@ -18,8 +18,9 @@ const postcssOpts = {
 };
 
 const page = {
-  studentProfile: [`${appDirectory}/apps/Profile/StudentPage/dev.js`],
-  studentSignUp: [`${appDirectory}/apps/SignUp/StudentPage/dev.js`]
+  studentProfile: [`${appDirectory}/apps/Student/ProfilePage/dev.js`],
+  studentSignUp: [`${appDirectory}/apps/Student/SignUpPage/dev.js`],
+  studentSignIn: [`${appDirectory}/apps/Student/SignInPage/dev.js`]
 }
 
 const setting = {

@@ -57,6 +57,7 @@ class SignUpPage extends React.Component {
             return (
               <List key={key} renderHeader={() => listHeader[key]}>
                 { formElements[key].map((e) => {
+                  const errorMessage = getFieldError(e.key);
                   if ( e.category === 'input' ) {
                     return (
                       [
@@ -67,7 +68,7 @@ class SignUpPage extends React.Component {
                           className = { getFieldError(e.key) ? style.errorInput: null }
                           {...getFieldProps(e.key, e.fieldProps)}
                         >{ e.lable }</InputItem>,
-                        <div key = {`${e.key}-error`} className={style.error}> { getFieldError(e.key) ? getFieldError(e.key).join(',') : null }</div>
+                        <div key = {`${e.key}-error`} className={style.error}> { errorMessage ? errorMessage.join(',') : null }</div>
                       ]
                     )
                   } else if ( e.category === 'radio' ) {
@@ -78,7 +79,7 @@ class SignUpPage extends React.Component {
                         {...getFieldProps(e.key, e.fieldProps)}
                         list = {e.list}
                       />,
-                      <div key = {`${e.key}-error`} className={style.error}> { getFieldError(e.key) ? getFieldError(e.key).join(',') : null }</div>
+                      <div key = {`${e.key}-error`} className={style.error}> { errorMessage ? errorMessage.join(',') : null }</div>
                     ])
                   } else if ( e.category === 'select' ) {
                     return ([
@@ -88,7 +89,7 @@ class SignUpPage extends React.Component {
                         lable = {e.lable}
                         {...getFieldProps(e.key, e.fieldProps)}
                       />,
-                      <div key = {`${e.key}-error`} className={style.error}> { getFieldError(e.key) ? getFieldError(e.key).join(',') : null }</div>
+                      <div key = {`${e.key}-error`} className={style.error}> { errorMessage ? errorMessage.join(',') : null }</div>
                     ])
                   }
                 }) }

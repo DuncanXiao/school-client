@@ -74,6 +74,7 @@
     "classnames": "^2.2.5",
     "config": "^2.0.1",
     "dotenvjs": "^1.0.5",
+    "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "postcss-loader": "^3.0.0",
